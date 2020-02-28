@@ -1,0 +1,11 @@
+<h1>エンドユーザー編集</h1>
+<%= form_for(current_end_user, url: end_users_path) do |f| %>
+  <% if current_end_user.errors.any? %>
+    <% current_end_user.errors.full_messages.each do |m| %>
+      <%= m %><br>
+    <% end %>
+  <% end %>
+　Eメール<br>
+  <%= f.email_field :email %><br>
+  <%= f.submit '更新' %>
+<% end %>

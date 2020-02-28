@@ -1,1 +1,5 @@
 <h1>エンドユーザーマイページ</h1>
+<%= current_end_user.last_name %><%= current_end_user.first_name %><br>
+<%= current_end_user.email %><br>
+<%= link_to "編集", edit_end_users_path %><br>
+<%= link_to "退会", end_users_path, method: :delete, data: { confirm: '本当に退会しますか？' } %>

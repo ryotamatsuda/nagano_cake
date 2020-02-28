@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
     when Admin
       admins_items_path
     when EndUser
-      end_user_path(current_end_user.id)
+      end_users_path
     end
   end
 
