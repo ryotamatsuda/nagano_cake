@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  scope module: :publics do
+    resource :end_users, only: [:show, :edit, :update, :destroy]
+    # get 'end_users/withdraw_confirmation' => 'end_users#withdraw_confirmation'
+  end
   devise_for :end_users, controllers: {
     sessions: 'publics/sessions',
     passwords: 'publics/passwords',
@@ -7,16 +11,13 @@ Rails.application.routes.draw do
   devise_scope :end_user do
     root to: 'publics/sessions#new'
   end
-  scope module: :publics do
-    resources :end_users, only: [:show]
-  end
   devise_for :admins, controllers: {
     sessions: 'admins/sessions',
     passwords: 'admins/passwords',
     registrations: 'admins/registrations'
   }
   namespace :admins do
-    resources :items
+    resources :items, except: [:destroy]
+    resources :end_users, only: [:index, :show, :edit, :update]
   end
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
