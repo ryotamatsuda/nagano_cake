@@ -7,4 +7,9 @@ class Publics::ItemsController < ApplicationController
     @all_valid_items = Item.joins(:genre).where("(genres.valid_flag = ?) AND (sale_status = ?)", true, true)
   end
 
+  def show
+    @item = Item.find(params[:id])
+    @cart_item = CartItem.new
+  end
+
 end
