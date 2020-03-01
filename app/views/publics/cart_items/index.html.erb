@@ -1,0 +1,25 @@
+<h1>カート一覧</h1>
+
+
+
+<table>
+  <tr>
+    <th>商品名</th>
+    <th>数量</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <% current_end_user.cart_items.includes(:item).each do |c_i| %>
+  <tr>
+    <td><%= c_i.item.name %></td>
+    <td><%= c_i.count %></td>
+    <%= form_for(c_i) do |f| %>
+    <td>
+      <%= f.number_field :count, :value => c_i.count %>
+      <%= f.submit "変更" %>
+    </td>
+    <% end %>
+    <td><%= link_to "この商品を削除", cart_item_path(c_i), method: :delete %></td>
+  </tr>
+  <% end %>
+</table>

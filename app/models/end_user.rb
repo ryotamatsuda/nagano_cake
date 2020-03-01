@@ -5,4 +5,5 @@ class EndUser < ApplicationRecord
          :recoverable, :rememberable, :validatable
   acts_as_paranoid
   validates :email, presence: true
+  has_many :cart_items
 end

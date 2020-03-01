@@ -1,0 +1,12 @@
+<h1>商品詳細</h1>
+<p>商品名</p>
+<p><%= @item.name %></p>
+<p>価格</p>
+<p><%= @item.price %>円</p>
+<p>ジャンル名</p>
+<p><%= @item.genre.name %></p>
+<%= form_for(@cart_item) do |f| %>
+  <%= f.number_field :count, min: 1 %>
+  <%= f.hidden_field :item_id, :value => @item.id %>
+  <%= f.submit "この商品をカートに入れる" %>
+<% end %>
