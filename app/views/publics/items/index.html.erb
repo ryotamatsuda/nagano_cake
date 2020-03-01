@@ -1,0 +1,7 @@
+<h1>public商品一覧</h1>
+<% @all_valid_items.each do |i| %>
+  <div class="item">
+    <p><%= i.name %></p>
+    <%= i.price %>円
+  </div>
+<% end %>

@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   scope module: :publics do
     resource :end_users, only: [:show, :edit, :update, :destroy]
+    resources :items, only: [:index]
     # get 'end_users/withdraw_confirmation' => 'end_users#withdraw_confirmation'
   end
   devise_for :end_users, controllers: {
