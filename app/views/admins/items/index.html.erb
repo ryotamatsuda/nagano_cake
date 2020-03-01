@@ -1,1 +1,18 @@
-<h1>商品一覧ページ</h1>
+<h1>admin商品一覧</h1>
+<% @all_items.each do |i| %>
+  <div class="item">
+    <p>商品名:<%= i.name %></p>
+    <p>価格:<%= i.price %>円</p>
+    <p>ジャンル:<%= i.genre.name %></p>
+    <% if i.genre.valid_flag == true %>
+      <p>有効ジャンル</p>
+    <% else %>
+      <p>無効ジャンル</p>
+    <% end %>
+    <% if i.sale_status == true %>
+      <p>販売中</p>
+    <% else %>
+      <p>販売停止中</p>
+    <% end %>
+  </div>
+<% end %>
