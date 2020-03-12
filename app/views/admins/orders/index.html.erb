@@ -1,0 +1,21 @@
+<h1>受注一覧</h1>
+<table>
+  <tr>
+    <th>注文ステータス</th>
+    <th>支払額</th>
+    <th>支払い方法</th>
+    <th>配送先</th>
+    <th></th>
+  </tr>
+  <% @all_orders.each do |order| %>
+  <tr>
+    <%= form_for(order, url: admins_order_path(order.id), method: :patch) do |o| %>
+    <td><%= o.select :order_status, ['入金待ち','入金確認','制作中','発送準備中','発送済み'] %><%= o.submit '更新' %></td>
+    <% end %>
+    <td><%= order.total_price %></td>
+    <td><%= order.method_of_payment %></td>
+    <td><%= order.order_address_info %></td>
+    <td><%= link_to "show", admins_order_path(order.id) %></td>
+  </tr>
+  <% end %>
+</table>

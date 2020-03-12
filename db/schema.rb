@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_01_102326) do
+ActiveRecord::Schema.define(version: 2020_03_11_121453) do
+
+  create_table "addresses", force: :cascade do |t|
+    t.integer "end_user_id", null: false
+    t.string "post_code", null: false
+    t.string "street_address", null: false
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -76,6 +85,28 @@ ActiveRecord::Schema.define(version: 2020_03_01_102326) do
     t.integer "price", null: false
     t.string "image_id"
     t.boolean "sale_status", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "order_items", force: :cascade do |t|
+    t.integer "order_id", null: false
+    t.integer "item_id", null: false
+    t.integer "count", null: false
+    t.integer "subtotal_price", null: false
+    t.integer "production_status", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "end_user_id", null: false
+    t.integer "total_price", null: false
+    t.integer "order_status", default: 0, null: false
+    t.integer "method_of_payment", null: false
+    t.string "shopping_post_code", null: false
+    t.string "shopping_street_address", null: false
+    t.string "shopping_name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

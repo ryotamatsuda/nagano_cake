@@ -1,0 +1,50 @@
+<h1>注文確認画面</h1>
+<%= form_for(@new_order) do |f| %>
+  <p>お支払方法</p>
+    <p class="margin-left-20"><%= @order_method_of_payment %></p>
+    <%= f.hidden_field :method_of_payment, value: @order_method_of_payment %>
+  <p>お届け先</p>
+    <% case @order_delivery_info_kind %>
+    <% when 'self' %>
+      <p><%= current_end_user.address_info %></p>
+      <%= f.hidden_field :shopping_post_code, value: current_end_user.post_code %>
+      <%= f.hidden_field :shopping_street_address, value: current_end_user.street_address %>
+      <%= f.hidden_field :shopping_name, value: current_end_user.full_name %>
+    <% when 'other' %>
+      <p><%= @other_address.other_address_info %></p>
+      <%= f.hidden_field :shopping_post_code, value: @other_address.post_code %>
+      <%= f.hidden_field :shopping_street_address, value: @other_address.street_address %>
+      <%= f.hidden_field :shopping_name, value: @other_address.full_name %>
+    <% when 'new' %>
+      <p><%= @new_post_code + @new_street_address + @new_name %></p>
+      <%= f.hidden_field :shopping_post_code, value: @new_post_code %>
+      <%= f.hidden_field :shopping_street_address, value: @new_street_address %>
+      <%= f.hidden_field :shopping_name, value: @new_name %>
+    <% end %>
+  <p>注文商品</p>
+    <table>
+      <tr>
+        <th>商品名</th>
+        <th>数量</th>
+        <th>小計</th>
+      </tr>
+      <% current_end_user.cart_items.includes(:item).each do |c_i| %>
+      <tr>
+        <td><%= c_i.item.name %></td>
+        <td><%= c_i.count %></td>
+        <td><%= c_i.subtotal_price %>円</td>
+      </tr>
+      <% end %>
+      <tr>
+        <td></td>
+        <td>送料</td>
+        <td>500円</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>合計</td>
+        <td><%= current_end_user.cart_items_total_price %>円</td>
+      </tr>
+    </table>
+  <%= f.submit "注文を確定する" %>
+<% end %>
