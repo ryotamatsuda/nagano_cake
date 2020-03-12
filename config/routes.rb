@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   scope module: :publics do
     resource :end_users, only: [:show, :edit, :update, :destroy]
     resources :items, only: [:index, :show]
+    post "/items/search" => "items#search", as: 'search'
     resources :cart_items, only: [:index, :create, :update, :destroy]
     resources :orders, only: [:index, :new, :create]
     get "/orders/purchase_confirmation" => "orders#purchase_confirmation"
