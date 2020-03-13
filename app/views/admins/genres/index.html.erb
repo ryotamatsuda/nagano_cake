@@ -1,0 +1,28 @@
+<h1>ジャンル一覧</h1>
+<table>
+  <tr>
+    <th>ジャンル名</th>
+    <th>フラグ</th>
+  </tr>
+  <% @all_genres.each do |g| %>
+    <%= form_for(g, url: admins_genre_path(g.id), method: :patch) do |f| %>
+    <tr>
+      <td><%= f.text_field :name %></td>
+      <% if g.valid_flag == true %>
+        <td><%= f.select :valid_flag, [['有効', 1],['無効', 0]] %></td>
+      <% elsif g.valid_flag == false %>
+        <td><%= f.select :valid_flag, [['無効', 0],['有効', 1]] %></td>
+      <% end %>
+      <td><%= f.submit "更新" %></td>
+    </tr>
+    <% end %>
+  <% end %>
+</table>
+<h2>新規ジャンル追加</h2>
+<%= form_for(@new_genre, url: admins_genres_path) do |f| %>
+  <p>ジャンル名</p>
+  <%= f.text_field :name %>
+  <p>有効フラグ</p>
+  <%= f.select :valid_flag, [['有効', 1],['無効', 0]] %>
+  <%= f.submit "追加" %>
+<% end %>

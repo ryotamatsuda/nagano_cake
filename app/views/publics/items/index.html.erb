@@ -1,4 +1,8 @@
 <h1>public商品一覧</h1>
+<%= form_with(url: search_path, local: true) do %>
+  <%= text_field :search, :content %>
+  <%= submit_tag '検索' %>
+<% end %>
 <% @all_valid_items.each do |i| %>
   <%= link_to item_path(i.id) do %>
   <div class="item">
